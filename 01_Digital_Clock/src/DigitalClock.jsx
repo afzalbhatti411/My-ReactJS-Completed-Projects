@@ -50,6 +50,8 @@ function Clock(){
         </>
     )
 }
+
+export default Clock;
 */
 ...........................................
 /* VERSION 2: (Best Practice)
@@ -104,4 +106,4 @@ function Clock(){
 export default Clock;
 
 
-export default Clock;
+
