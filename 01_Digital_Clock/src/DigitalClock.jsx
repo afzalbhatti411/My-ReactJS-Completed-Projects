@@ -57,7 +57,7 @@ export default Clock;
 /* VERSION 2: (Best Practice)
   Solution: Uses useEffect to ensure the interval starts only once 
   and includes a cleanup function to prevent memory leaks.
-*/
+
 import React, { useEffect, useState } from "react";
 
 function Clock(){
@@ -104,6 +104,52 @@ function Clock(){
 }
 
 export default Clock;
+*/
+..................................................
+/*  
+Version 3 Improvements:
+
+Memory Management: Added return () => clearInterval(intervalId) inside useEffect to stop "zombie" processes.
+
+Architectural Optimization: Moved formatedTime to the Module Scope (outside the component). This ensures the function is created once in memory, rather than being re-declared 60 times every minute.
+
+Scope Logic: Utilized Vanilla JS Lexical Scoping to allow the component to access the helper function from the outer scope.
+*/
+
+import React, { useEffect, useState } from "react";
+
+    const formatedTime = ()=> new Date().toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: '2-digit',
+        second: "2-digit",
+        hour12: true
+    })
+
+function DigiClock(){
+
+    const [time, setTime] = useState(formatedTime());
+    console.log(time);
+
+    useEffect(()=>{
+        const intervalId = setInterval(() => {
+            setTime(formatedTime())
+        }, 1000);
+
+        return ()=> clearInterval(intervalId);
+
+    }, [])
+    return(
+        <div>
+            <h2>{time}</h2>
+        </div>
+    )
+}
+
+export default DigiClock;
+
+
+
+
 
 
 
