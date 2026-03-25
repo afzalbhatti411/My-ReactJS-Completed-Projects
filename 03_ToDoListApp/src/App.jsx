@@ -1,90 +1,81 @@
 import React, { useState } from "react";
 
 function ToDoListApp(){
-
   const [inputText, setInputText] = useState('');
   const [taskList, setTaskList] = useState([]);
 
   const addTask = ()=>{
-    if(inputText !== ""){
+    if(inputText.trim() !== ""){
       setTaskList([...taskList, inputText]);
-      setInputText('')
+      setInputText('');
     }
   }
 
   const deleteTask = (index)=>{
-    const updatedTask = taskList.filter((_, i) => i !==index);
+    const updatedTask = taskList.filter((_, i)=> i !== index);
     setTaskList(updatedTask);
   }
-
   const styles = {
     container: {
       backgroundColor: "pink",
-      maxWidth: "400px",
-      padding: "10px",
+      margin: "50px auto",
+      maxWidth: "300px",
+      textAlign: "center",
+      padding: "5px",
       border: "1px solid",
-      borderRadius: "20px",
-      boxShadow: "0 4px 10px rgba(10, 184, 94, 0.6)",
-      position: "absolute",
-      top: "50%",
-      left: "50%",
-      transform: "translate(-50%, -50%)",
+      borderRadius: "10px",
+      boxShadow: "0 4px 10px rgba(50, 44, 39, 0.9)"
     },
-    title: {
-      fontSize: "30px",
-      padding: "10px",
-      marginTop: "10px"
-    },
-    inputDiv: {
+    inputGroup: {
       display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
       gap: "10px",
-      marginBottom: "20px",
-      padding: "10px" 
+      marginBottom: "20px"
     },
-    input:{
-      border: "1px solid",
+    input: {
+      flex: 1, 
+      padding: "10px",
       borderRadius: "5px",
-      fontSize: "15px",
+      border: "1px solid #ccc"
     },
-    button: {
-
-      border: "2px solid",
-      borderRadius: "5px"
+    addButton: {
+      backgroundColor: "#28a745",
+      color: "white",
+      border: "none",
+      borderRadius: "5px",
+      padding: "10px 15px",
+      cursor: "pointer"
     },
     list: {
-      textAlign: "center",
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center",
-      marginTop: "5px",
-      marginBotton: "10px",
-      backgroundColor: "rgba(255, 255, 255, 0.5)",
-      padding: "8px",
-      border: "1px, solid",
-      borderRadius: "8px"
-    }
+      listStyle: "none",
+      padding:0
+    },
+
+    listItems: {
+      display: "flex", 
+      justifyContent: "space-between", 
+      alignItems: "center", 
+      padding: "10px",
+      borderBottom: "1px solid #ddd"    }
 
 
   }
   return(
     <div style={styles.container}>
-      <h2 style={styles.title}> To Do List App </h2>
-      <div style={styles.inputDiv}>
-      <input style={styles.input} type="text" placeholder="Enter your Task here..." value={inputText} onChange={(e)=>setInputText(e.target.value)}/>
-      <button style={styles.button} onClick={addTask}> Add Task </button>
+      <h2>TO DO LIST APP</h2>
+      <div style={styles.inputGroup}>
+      <input style={styles.input} type="text" placeholder="Enter your Task here..." value={inputText} onChange={(e)=> setInputText(e.target.value)}/>
+      <button style={styles.addButton} onClick={addTask}>Add Task </button>
       </div>
-      <ul>
-        {taskList.map((item, index)=>
-        <li style={styles.list} key={index}>{item}
+      <ul style={styles.list}>
+        {taskList.map((item, index)=> 
+        <li style={styles.listItems} key={index}>{item}
         <button onClick={()=>deleteTask(index)}>Delete</button>
         </li>
         )}
       </ul>
       
+
     </div>
   )
 }
-
 export default ToDoListApp;
