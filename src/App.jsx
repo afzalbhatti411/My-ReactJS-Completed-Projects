@@ -9,7 +9,7 @@ export default function MovieSearchApp(){
 
   const searchMovie = async ()=>{
 
-    if(!searchMovie) return;
+    if(!searchQuery) return;
 
     const response = await fetch(`http://www.omdbapi.com/?s=${searchQuery}&apikey=${API_KEY}`);
     const data = await response.json();
