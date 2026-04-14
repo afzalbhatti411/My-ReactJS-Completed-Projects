@@ -1,11 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import './App.css';
 
 export default function MovieSearchApp(){
+
+   const API_KEY = '2f99e84e';
 
   const [searchQuery, setSearchQuery] = useState('');
   const [movies, setMovies] = useState([]);
 
-  const API_KEY = '2f99e84e';
+
+  useEffect(()=>{
+    const saveMovies = localStorage.getItem('movies')
+    setMovies(JSON.parse(saveMovies))
+  }, []);
+
+
+  useEffect(()=>{
+    if(movies.length > 0){
+      localStorage.setItem('movies', JSON.stringify(movies))
+    }
+  }, [movies])
 
   const searchMovie = async ()=>{
 
