@@ -1,11 +1,10 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-// import ExpenseTracker from './App.jsx'
-import MyExpenseTracker from './App.jsx'
+import MovieSearchApp from './App.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <MyExpenseTracker />
+    <MovieSearchApp />
   </StrictMode>,
 )
